@@ -191,7 +191,7 @@ public class SysUserServiceImpl implements ISysUserService
     {
         long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkPhoneUnique(user.getPhonenumber());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
+        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId)
         {
             return UserConstants.NOT_UNIQUE;
         }

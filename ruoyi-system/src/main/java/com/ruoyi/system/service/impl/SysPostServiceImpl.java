@@ -83,7 +83,7 @@ public class SysPostServiceImpl implements ISysPostService
     {
         long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
         SysPost info = postMapper.checkPostNameUnique(post.getPostName());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId)
         {
             return UserConstants.NOT_UNIQUE;
         }

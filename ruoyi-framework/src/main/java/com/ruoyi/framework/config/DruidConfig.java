@@ -74,7 +74,7 @@ public class DruidConfig
             targetDataSources.put(sourceName, dataSource);
         }
         catch (Exception e) {
-            throw new RuntimeException (e);
+            //throw new RuntimeException (e);
         }
     }
 

@@ -150,7 +150,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     {
         long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId)
         {
             return UserConstants.NOT_UNIQUE;
         }
