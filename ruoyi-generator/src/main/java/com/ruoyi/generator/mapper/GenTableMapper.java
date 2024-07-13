@@ -11,7 +11,7 @@ import com.ruoyi.generator.domain.GenTable;
 public interface GenTableMapper
 {
     /**
-     * 查询业务列表
+     * 查询业务列表,gen_table
      * 
      * @param genTable 业务信息
      * @return 业务集合

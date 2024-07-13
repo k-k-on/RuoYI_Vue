@@ -244,6 +244,7 @@ export default {
   created() {
     this.getList();
   },
+  /*在挂载后和更新前被调用的。但如果该组件中没有使用缓存，也就是没有被<keep-alive>包裹的话，activated是不起作用的*/
   activated() {
     const time = this.$route.query.t;
     if (time != null && time != this.uniqueId) {
