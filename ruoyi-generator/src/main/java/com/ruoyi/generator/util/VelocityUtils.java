@@ -15,7 +15,7 @@ import com.ruoyi.generator.domain.GenTableColumn;
 
 /**
  * 模板处理工具类
- * 
+ *
  * @author ruoyi
  */
 public class VelocityUtils
@@ -36,11 +36,11 @@ public class VelocityUtils
      */
     public static VelocityContext prepareContext(GenTable genTable)
     {
-        String moduleName = genTable.getModuleName();
-        String businessName = genTable.getBusinessName();
-        String packageName = genTable.getPackageName();
-        String tplCategory = genTable.getTplCategory();
-        String functionName = genTable.getFunctionName();
+        String moduleName = genTable.getModuleName();//生成模块名
+        String businessName = genTable.getBusinessName();//生成业务名
+        String packageName = genTable.getPackageName();//生成包路径
+        String tplCategory = genTable.getTplCategory();//使用的模板（crud单表操作 tree树表操作 sub主子表操作）
+        String functionName = genTable.getFunctionName();//生成功能名
 
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("tplCategory", genTable.getTplCategory());
@@ -56,17 +56,17 @@ public class VelocityUtils
         velocityContext.put("author", genTable.getFunctionAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
         velocityContext.put("pkColumn", genTable.getPkColumn());
-        velocityContext.put("importList", getImportList(genTable));
+        velocityContext.put("importList", getImportList(genTable));//根据列类型获取导入包
         velocityContext.put("permissionPrefix", getPermissionPrefix(moduleName, businessName));
         velocityContext.put("columns", genTable.getColumns());
         velocityContext.put("table", genTable);
-        velocityContext.put("dicts", getDicts(genTable));
-        setMenuVelocityContext(velocityContext, genTable);
-        if (GenConstants.TPL_TREE.equals(tplCategory))
+        velocityContext.put("dicts", getDicts(genTable));//根据列类型获取字典组
+        setMenuVelocityContext(velocityContext, genTable);//获取上级菜单ID字段
+        if (GenConstants.TPL_TREE.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为tree
         {
             setTreeVelocityContext(velocityContext, genTable);
         }
-        if (GenConstants.TPL_SUB.equals(tplCategory))
+        if (GenConstants.TPL_SUB.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为sub
         {
             setSubVelocityContext(velocityContext, genTable);
         }
@@ -75,9 +75,9 @@ public class VelocityUtils
 
     public static void setMenuVelocityContext(VelocityContext context, GenTable genTable)
     {
-        String options = genTable.getOptions();
+        String options = genTable.getOptions();//其它生成选项
         JSONObject paramsObj = JSON.parseObject(options);
-        String parentMenuId = getParentMenuId(paramsObj);
+        String parentMenuId = getParentMenuId(paramsObj);//获取上级菜单ID字段
         context.put("parentMenuId", parentMenuId);
     }
 
@@ -143,7 +143,7 @@ public class VelocityUtils
         templates.add("vm/xml/mapper.xml.vm");
         templates.add("vm/sql/sql.vm");
         templates.add("vm/js/api.js.vm");
-        if (GenConstants.TPL_CRUD.equals(tplCategory))
+        if (GenConstants.TPL_CRUD.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为crud
         {
             templates.add(useWebType + "/index.vue.vm");
         }
@@ -240,7 +240,7 @@ public class VelocityUtils
 
     /**
      * 根据列类型获取导入包
-     * 
+     *
      * @param genTable 业务表对象
      * @return 返回需要导入的包列表
      */
@@ -270,7 +270,7 @@ public class VelocityUtils
 
     /**
      * 根据列类型获取字典组
-     * 
+     *
      * @param genTable 业务表对象
      * @return 返回字典组
      */
@@ -289,7 +289,7 @@ public class VelocityUtils
 
     /**
      * 添加字典列表
-     * 
+     *
      * @param dicts 字典列表
      * @param columns 列集合
      */

@@ -205,6 +205,8 @@ export default {
   components: { importTable, createTable },
   data() {
     return {
+      genPath: "",
+      genType: 0,
       // 遮罩层
       loading: true,
       // 唯一标识符
@@ -276,13 +278,21 @@ export default {
         this.$modal.msgError("请选择要生成的数据");
         return;
       }
-      if(row.genType === "1") {
-        genCode(row.tableName).then(response => {
-          this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
-        });
-      } else {
-        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
+      if(row.tableName != undefined || tableNames.length == 1) { //选中单行或者在对应行后操作
+        if(row.genType == "1") {//生成代码方式（0zip压缩包 1自定义路径）
+          genCode(row.tableName).then(response => {
+            this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
+          });
+          return;
+
+        }else if (this.genType == "1") {//生成代码方式（0zip压缩包 1自定义路径）
+          genCode(tableNames[0]).then(response => {
+            this.$modal.msgSuccess("成功生成到自定义路径：" + this.genPath);
+          });
+        }
+        return;
       }
+      this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
     },
     /** 同步数据库操作 */
     handleSynchDb(row) {
@@ -332,6 +342,10 @@ export default {
       this.tableNames = selection.map(item => item.tableName);
       this.single = selection.length != 1;
       this.multiple = !selection.length;
+      if(this.single == false) {
+        this.genType = selection.map(item => item.genType);
+        this.genPath = selection.map(item => item.genPath);
+      }
     },
     /** 修改按钮操作 */
     handleEditTable(row) {

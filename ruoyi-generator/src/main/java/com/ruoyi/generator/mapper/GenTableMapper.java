@@ -50,7 +50,7 @@ public interface GenTableMapper
     GenTable selectGenTableById(Long id);
 
     /**
-     * 查询表名称业务信息
+     * 查询表名称业务信息，联结gen_table和gen_table_column进行查询
      * 
      * @param tableName 表名称
      * @return 业务信息

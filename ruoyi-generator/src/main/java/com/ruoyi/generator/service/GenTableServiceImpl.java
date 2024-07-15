@@ -38,7 +38,7 @@ import com.ruoyi.generator.util.VelocityUtils;
 
 /**
  * 业务 服务层实现
- * 
+ *
  * @author ruoyi
  */
 @Service
@@ -54,7 +54,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务信息
-     * 
+     *
      * @param id 业务ID
      * @return 业务信息
      */
@@ -68,7 +68,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 业务集合
      */
@@ -80,7 +80,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 数据库表集合
      */
@@ -92,7 +92,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param tableNames 表名称组
      * @return 数据库表集合
      */
@@ -104,7 +104,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询所有表信息
-     * 
+     *
      * @return 表信息集合
      */
     @Override
@@ -115,7 +115,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 修改业务
-     * 
+     *
      * @param genTable 业务信息
      */
     @Override
@@ -136,7 +136,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 删除业务对象
-     * 
+     *
      * @param tableIds 需要删除的数据ID
      */
     @Override
@@ -161,7 +161,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 导入表结构
-     * 
+     *
      * @param tableList 导入表列表
      */
     @Override
@@ -195,7 +195,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 预览代码
-     * 
+     *
      * @param tableId 表编号
      * @return 预览数据列表
      */
@@ -228,7 +228,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 生成代码（下载方式）
-     * 
+     *
      * @param tableName 表名称
      * @return 数据
      */
@@ -244,7 +244,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 生成代码（自定义路径）
-     * 
+     *
      * @param tableName 表名称
      */
     @Override
@@ -257,15 +257,15 @@ public class GenTableServiceImpl implements IGenTableService
         // 设置主键列信息
         setPkColumn(table);
 
-        VelocityInitializer.initVelocity();
+        VelocityInitializer.initVelocity();//初始化vm方法
 
-        VelocityContext context = VelocityUtils.prepareContext(table);
+        VelocityContext context = VelocityUtils.prepareContext(table);//设置模板变量信息
 
         // 获取模板列表
         List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory(), table.getTplWebType());
         for (String template : templates)
         {
-            if (!StringUtils.containsAny(template, "sql.vm", "api.js.vm", "index.vue.vm", "index-tree.vue.vm"))
+            if (!StringUtils.containsAny(template, "sql.vm", "api.js.vm", "index.vue.vm", "index-tree.vue.vm"))//如果包含这些后缀名的模板
             {
                 // 渲染模板
                 StringWriter sw = new StringWriter();
@@ -273,7 +273,7 @@ public class GenTableServiceImpl implements IGenTableService
                 tpl.merge(context, sw);
                 try
                 {
-                    String path = getGenPath(table, template);
+                    String path = getGenPath(table, template);//获取代码生成地址
                     FileUtils.writeStringToFile(new File(path), sw.toString(), CharsetKit.UTF_8);
                 }
                 catch (IOException e)
@@ -286,7 +286,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 同步数据库
-     * 
+     *
      * @param tableName 表名称
      */
     @Override
@@ -341,7 +341,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 批量生成代码（下载方式）
-     * 
+     *
      * @param tableNames 表数组
      * @return 数据
      */
@@ -400,7 +400,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 修改保存参数校验
-     * 
+     *
      * @param genTable 业务信息
      */
     @Override
@@ -438,24 +438,24 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 设置主键列信息
-     * 
+     *
      * @param table 业务表信息
      */
     public void setPkColumn(GenTable table)
     {
-        for (GenTableColumn column : table.getColumns())
+        for (GenTableColumn column : table.getColumns())//获取表列信息，共13条
         {
-            if (column.isPk())
+            if (column.isPk())//是否主键（1是）
             {
-                table.setPkColumn(column);
+                table.setPkColumn(column);//只需要查找到第一个主键
                 break;
             }
         }
-        if (StringUtils.isNull(table.getPkColumn()))
+        if (StringUtils.isNull(table.getPkColumn()))//主键信息为空时
         {
-            table.setPkColumn(table.getColumns().get(0));
+            table.setPkColumn(table.getColumns().get(0));//设置第一个列信息为主键，即job_id
         }
-        if (GenConstants.TPL_SUB.equals(table.getTplCategory()))
+        if (GenConstants.TPL_SUB.equals(table.getTplCategory()))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为sub
         {
             for (GenTableColumn column : table.getSubTable().getColumns())
             {
@@ -474,21 +474,21 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 设置主子表信息
-     * 
+     *
      * @param table 业务表信息
      */
     public void setSubTable(GenTable table)
     {
-        String subTableName = table.getSubTableName();
+        String subTableName = table.getSubTableName();//关联父表的表名,获取table的subTableName属性
         if (StringUtils.isNotEmpty(subTableName))
         {
-            table.setSubTable(genTableMapper.selectGenTableByName(subTableName));
+            table.setSubTable(genTableMapper.selectGenTableByName(subTableName));//设置关联子表信息
         }
     }
 
     /**
      * 设置代码生成其他选项值
-     * 
+     *
      * @param genTable 设置后的生成对象
      */
     public void setTableFromOptions(GenTable genTable)
@@ -512,7 +512,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 获取代码生成地址
-     * 
+     *
      * @param table 业务表信息
      * @param template 模板文件路径
      * @return 生成地址
@@ -522,7 +522,7 @@ public class GenTableServiceImpl implements IGenTableService
         String genPath = table.getGenPath();
         if (StringUtils.equals(genPath, "/"))
         {
-            return System.getProperty("user.dir") + File.separator + "src" + File.separator + VelocityUtils.getFileName(template, table);
+            return System.getProperty("user.dir") + File.separator + "src" + File.separator + VelocityUtils.getFileName(template, table);//System.getProperty("user.dir"):获取当前系统项目所在的路径
         }
         return genPath + File.separator + VelocityUtils.getFileName(template, table);
     }
