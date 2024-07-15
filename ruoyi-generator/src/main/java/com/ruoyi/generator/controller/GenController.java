@@ -37,7 +37,7 @@ import com.ruoyi.generator.service.IGenTableService;
 
 /**
  * 代码生成 操作处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
@@ -130,24 +130,24 @@ public class GenController extends BaseController
     {
         try
         {
-            SqlUtil.filterKeyword(sql);
-            List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
+            SqlUtil.filterKeyword(sql);//SQL关键字检查，是否存在注入风险
+            List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);//转换sql语句为标准的SQLStatement集合
             List<String> tableNames = new ArrayList<>();
             for (SQLStatement sqlStatement : sqlStatements)
             {
-                if (sqlStatement instanceof MySqlCreateTableStatement)
+                if (sqlStatement instanceof MySqlCreateTableStatement)//判断对象sqlStatement是否是类MySqlCreateTableStatement的实例，返回 boolean 的数据类型
                 {
                     MySqlCreateTableStatement createTableStatement = (MySqlCreateTableStatement) sqlStatement;
-                    if (genTableService.createTable(createTableStatement.toString()))
+                    if (genTableService.createTable(createTableStatement.toString()))//建表，成功返回true
                     {
-                        String tableName = createTableStatement.getTableName().replaceAll("`", "");
+                        String tableName = createTableStatement.getTableName().replaceAll("`", "");//格式化表名
                         tableNames.add(tableName);
                     }
                 }
             }
-            List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames.toArray(new String[0]));
+            List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames.toArray(new String[0]));//查询数据库列表
             String operName = SecurityUtils.getUsername();
-            genTableService.importGenTable(tableList, operName);
+            genTableService.importGenTable(tableList, operName);//导入表结构
             return AjaxResult.success();
         }
         catch (Exception e)
@@ -237,8 +237,8 @@ public class GenController extends BaseController
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException
     {
         String[] tableNames = Convert.toStrArray(tables);
-        byte[] data = genTableService.downloadCode(tableNames);
-        genCode(response, data);
+        byte[] data = genTableService.downloadCode(tableNames);//批量生成代码（下载方式）
+        genCode(response, data);//生成zip文件
     }
 
     /**

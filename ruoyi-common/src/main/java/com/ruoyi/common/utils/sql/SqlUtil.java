@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * sql操作工具类
- * 
+ *
  * @author ruoyi
  */
 public class SqlUtil
@@ -59,9 +59,10 @@ public class SqlUtil
             return;
         }
         String[] sqlKeywords = StringUtils.split(SQL_REGEX, "\\|");
+        //判断是否包含除create以外的关键字，如select、insert等
         for (String sqlKeyword : sqlKeywords)
         {
-            if (StringUtils.indexOfIgnoreCase(value, sqlKeyword) > -1)
+            if (StringUtils.indexOfIgnoreCase(value, sqlKeyword) > -1)//获取sqlKeyword在字符串value中第一次出现的索引，若字符串或字符序列为""或null或者字符串中不包含该字符或字符序列，则返回-1(不区分大小写）
             {
                 throw new UtilException("参数存在SQL注入风险");
             }

@@ -284,13 +284,12 @@ export default {
             this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
           });
           return;
-
         }else if (this.genType == "1") {//生成代码方式（0zip压缩包 1自定义路径）
           genCode(tableNames[0]).then(response => {
             this.$modal.msgSuccess("成功生成到自定义路径：" + this.genPath);
           });
+          return;
         }
-        return;
       }
       this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
     },

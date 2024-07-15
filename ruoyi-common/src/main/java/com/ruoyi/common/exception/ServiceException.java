@@ -2,7 +2,7 @@ package com.ruoyi.common.exception;
 
 /**
  * 业务异常
- * 
+ *
  * @author ruoyi
  */
 public final class ServiceException extends RuntimeException
@@ -22,7 +22,7 @@ public final class ServiceException extends RuntimeException
     /**
      * 错误明细，内部调试错误
      * <p>
-     * 和 {@link CommonResult#getDetailMessage()} 一致的设计
+     * 和 {@link GlobalException#getDetailMessage()} 一致的设计
      */
     private String detailMessage;
 

@@ -352,7 +352,7 @@ public class GenTableServiceImpl implements IGenTableService
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         for (String tableName : tableNames)
         {
-            generatorCode(tableName, zip);
+            generatorCode(tableName, zip);//查询表信息并生成代码
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();

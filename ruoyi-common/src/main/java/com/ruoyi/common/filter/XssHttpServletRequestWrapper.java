@@ -15,14 +15,15 @@ import com.ruoyi.common.utils.html.EscapeUtil;
 
 /**
  * XSS过滤处理
- * 
+ *
  * @author ruoyi
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
 {
     /**
-     * @param request
+     *
      */
+    //@param request
     public XssHttpServletRequestWrapper(HttpServletRequest request)
     {
         super(request);
@@ -99,9 +100,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
 
     /**
      * 是否是Json请求
-     * 
-     * @param request
+     *
      */
+    //@param request
     public boolean isJsonRequest()
     {
         String header = super.getHeader(HttpHeaders.CONTENT_TYPE);
