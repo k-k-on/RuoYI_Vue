@@ -12,8 +12,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 通用http工具封装
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:28
  */
 public class HttpHelper
 {

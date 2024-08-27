@@ -2,8 +2,9 @@ package com.ruoyi.common.enums;
 
 /**
  * 用户状态
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:05
  */
 public enum UserStatus
 {

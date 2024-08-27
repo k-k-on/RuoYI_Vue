@@ -4,8 +4,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 缓存信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:42
  */
 public class SysCache
 {

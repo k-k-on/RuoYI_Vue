@@ -8,8 +8,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 获取IP方法
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:30
  */
 public class IpUtils
 {
@@ -22,7 +23,7 @@ public class IpUtils
 
     /**
      * 获取客户端IP
-     * 
+     *
      * @return IP地址
      */
     public static String getIpAddr()
@@ -32,7 +33,7 @@ public class IpUtils
 
     /**
      * 获取客户端IP
-     * 
+     *
      * @param request 请求对象
      * @return IP地址
      */
@@ -70,7 +71,7 @@ public class IpUtils
 
     /**
      * 检查是否为内部IP地址
-     * 
+     *
      * @param ip IP地址
      * @return 结果
      */
@@ -82,7 +83,7 @@ public class IpUtils
 
     /**
      * 检查是否为内部IP地址
-     * 
+     *
      * @param addr byte地址
      * @return 结果
      */
@@ -123,7 +124,7 @@ public class IpUtils
 
     /**
      * 将IPv4地址转换成字节
-     * 
+     *
      * @param text IPv4地址
      * @return byte 字节
      */
@@ -211,7 +212,7 @@ public class IpUtils
 
     /**
      * 获取IP地址
-     * 
+     *
      * @return 本地IP地址
      */
     public static String getHostIp()
@@ -228,7 +229,7 @@ public class IpUtils
 
     /**
      * 获取主机名
-     * 
+     *
      * @return 本地主机名
      */
     public static String getHostName()
@@ -348,7 +349,7 @@ public class IpUtils
 
     /**
      * 校验ip是否符合过滤串规则
-     * 
+     *
      * @param filter 过滤IP列表,支持后缀'*'通配,支持网段如:`10.10.10.1-10.10.10.99`
      * @param ip 校验IP地址
      * @return boolean 结果

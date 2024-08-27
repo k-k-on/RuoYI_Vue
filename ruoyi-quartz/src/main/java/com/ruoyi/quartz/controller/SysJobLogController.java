@@ -1,6 +1,7 @@
 package com.ruoyi.quartz.controller;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,14 +22,15 @@ import com.ruoyi.quartz.service.ISysJobLogService;
 
 /**
  * 调度日志操作处理,针对sys_job_log表
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:35
  */
 @RestController
 @RequestMapping("/monitor/jobLog")
 public class SysJobLogController extends BaseController
 {
-    @Autowired
+    @Resource(name = "sysJobLogServiceImpl")
     private ISysJobLogService jobLogService;
 
     /**
@@ -55,7 +57,7 @@ public class SysJobLogController extends BaseController
         ExcelUtil<SysJobLog> util = new ExcelUtil<> (SysJobLog.class);
         util.exportExcel(response, list, "调度日志");
     }
-    
+
     /**
      * 根据调度编号获取详细信息
      */

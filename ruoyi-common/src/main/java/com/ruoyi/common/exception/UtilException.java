@@ -2,8 +2,9 @@ package com.ruoyi.common.exception;
 
 /**
  * 工具类异常
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:15
  */
 public class UtilException extends RuntimeException
 {

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,16 +38,16 @@ import com.ruoyi.generator.service.IGenTableService;
 /**
  * 代码生成 操作处理
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/23 15:16
  */
 @RestController
 @RequestMapping("/tool/gen")
 public class GenController extends BaseController
 {
-    @Autowired
+    @Resource
     private IGenTableService genTableService;
-
-    @Autowired
+    @Resource
     private IGenTableColumnService genTableColumnService;
 
     /**
@@ -96,7 +96,7 @@ public class GenController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:list')")
     @GetMapping(value = "/column/{tableId}")
-    public TableDataInfo columnList(Long tableId)
+    public TableDataInfo columnList(@PathVariable Long tableId)
     {
         TableDataInfo dataInfo = new TableDataInfo();
         List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
@@ -135,7 +135,8 @@ public class GenController extends BaseController
             List<String> tableNames = new ArrayList<>();
             for (SQLStatement sqlStatement : sqlStatements)
             {
-                if (sqlStatement instanceof MySqlCreateTableStatement)//判断对象sqlStatement是否是类MySqlCreateTableStatement的实例，返回 boolean 的数据类型
+                //判断对象sqlStatement是否是类MySqlCreateTableStatement的实例，返回 boolean 的数据类型
+                if (sqlStatement instanceof MySqlCreateTableStatement)
                 {
                     MySqlCreateTableStatement createTableStatement = (MySqlCreateTableStatement) sqlStatement;
                     if (genTableService.createTable(createTableStatement.toString()))//建表，成功返回true
@@ -192,9 +193,9 @@ public class GenController extends BaseController
         return success(dataMap);
     }
 
-    /**
+/*    *//**
      * 生成代码（下载方式）
-     */
+     *//*
     @PreAuthorize("@ss.hasPermi('tool:gen:code')")
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/download/{tableName}")
@@ -202,7 +203,7 @@ public class GenController extends BaseController
     {
         byte[] data = genTableService.downloadCode(tableName);
         genCode(response, data);
-    }
+    }*/
 
     /**
      * 生成代码（自定义路径）
@@ -221,10 +222,10 @@ public class GenController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:edit')")
     @Log(title = "代码生成", businessType = BusinessType.UPDATE)
-    @GetMapping("/synchDb/{tableName}")
-    public AjaxResult synchDb(@PathVariable("tableName") String tableName)
+    @GetMapping("/syncDb/{tableName}")
+    public AjaxResult syncDb(@PathVariable("tableName") String tableName)
     {
-        genTableService.synchDb(tableName);
+        genTableService.syncDb (tableName);
         return success();
     }
 

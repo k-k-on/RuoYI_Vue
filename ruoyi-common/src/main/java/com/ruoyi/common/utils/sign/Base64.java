@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 /**
  * Base64工具类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 16:26
  */
 public final class Base64
 {

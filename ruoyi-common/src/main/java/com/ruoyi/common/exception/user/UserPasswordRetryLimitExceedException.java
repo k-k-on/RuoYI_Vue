@@ -2,8 +2,9 @@ package com.ruoyi.common.exception.user;
 
 /**
  * 用户错误最大次数异常类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:14
  */
 public class UserPasswordRetryLimitExceedException extends UserException
 {

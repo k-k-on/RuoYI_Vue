@@ -2,8 +2,9 @@ package com.ruoyi.common.constant;
 
 /**
  * 任务调度通用常量
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:41
  */
 public class ScheduleConstants
 {
@@ -35,7 +36,6 @@ public class ScheduleConstants
          */
         PAUSE("1");
 
-        /*字段可能为 'final' BY LMY*/
         private final String value;
 
         Status(String value)

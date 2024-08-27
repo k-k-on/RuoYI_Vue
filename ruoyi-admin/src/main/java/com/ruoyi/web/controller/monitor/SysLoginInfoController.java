@@ -17,61 +17,62 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.service.SysPasswordService;
-import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.service.ISysLogininforService;
+import com.ruoyi.system.domain.SysLoginInfo;
+import com.ruoyi.system.service.ISysLoginInfoService;
 
 /**
  * 系统访问记录
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:01
  */
 @RestController
-@RequestMapping("/monitor/logininfor")
-public class SysLogininforController extends BaseController
+@RequestMapping("/monitor/loginInfo")
+public class SysLoginInfoController extends BaseController
 {
     @Autowired
-    private ISysLogininforService logininforService;
+    private ISysLoginInfoService loginInfoService;
 
     @Autowired
     private SysPasswordService passwordService;
 
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfo:list')")
     @GetMapping("/list")
-    public TableDataInfo list(SysLogininfor logininfor)
+    public TableDataInfo list(SysLoginInfo loginInfo)
     {
         startPage();
-        List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
+        List<SysLoginInfo> list = loginInfoService.selectLoginInfoList(loginInfo);
         return getDataTable(list);
     }
 
     @Log(title = "登录日志", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:export')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfo:export')")
     @PostMapping("/export")
-    public void export(HttpServletResponse response, SysLogininfor logininfor)
+    public void export(HttpServletResponse response, SysLoginInfo loginInfo)
     {
-        List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtil<SysLogininfor> util = new ExcelUtil<> (SysLogininfor.class);
+        List<SysLoginInfo> list = loginInfoService.selectLoginInfoList(loginInfo);
+        ExcelUtil<SysLoginInfo> util = new ExcelUtil<> (SysLoginInfo.class);
         util.exportExcel(response, list, "登录日志");
     }
 
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfo:remove')")
     @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{infoIds}")
     public AjaxResult remove(@PathVariable Long[] infoIds)
     {
-        return toAjax(logininforService.deleteLogininforByIds(infoIds));
+        return toAjax(loginInfoService.deleteLoginInfoByIds(infoIds));
     }
 
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfo:remove')")
     @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")
     public AjaxResult clean()
     {
-        logininforService.cleanLogininfor();
+        loginInfoService.cleanLoginInfo();
         return success();
     }
 
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:unlock')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfo:unlock')")
     @Log(title = "账户解锁", businessType = BusinessType.OTHER)
     @GetMapping("/unlock/{userName}")
     public AjaxResult unlock(@PathVariable("userName") String userName)

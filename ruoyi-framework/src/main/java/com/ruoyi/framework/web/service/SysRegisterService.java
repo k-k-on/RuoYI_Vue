@@ -18,21 +18,24 @@ import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 
+import javax.annotation.Resource;
+
 /**
  * 注册校验方法
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:30
  */
 @Component
 public class SysRegisterService
 {
-    @Autowired
+    @Resource(name = "sysUserServiceImpl")
     private ISysUserService userService;
 
-    @Autowired
+    @Resource(name = "sysConfigServiceImpl")
     private ISysConfigService configService;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     /**
@@ -84,7 +87,7 @@ public class SysRegisterService
             }
             else
             {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
+                AsyncManager.me().execute(AsyncFactory.recordLoginInfo (username, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
         return msg;
@@ -92,11 +95,10 @@ public class SysRegisterService
 
     /**
      * 校验验证码
-     * 
+     *
      * @param username 用户名
      * @param code 验证码
      * @param uuid 唯一标识
-     * @return 结果
      */
     public void validateCaptcha(String username, String code, String uuid)
     {

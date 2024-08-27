@@ -2,8 +2,9 @@ package com.ruoyi.common.constant;
 
 /**
  * 缓存的key 常量
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:40
  */
 public class CacheConstants
 {

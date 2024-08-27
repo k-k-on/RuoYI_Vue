@@ -16,9 +16,10 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.service.ISysUserService;
 
 /**
- * 用户验证处理
+ * 用户验证处理, 继承spring security的UserDetailsService接口
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/20 16:54
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService
@@ -27,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
     @Autowired
     private ISysUserService userService;
-    
+
     @Autowired
     private SysPasswordService passwordService;
 
@@ -37,6 +38,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
+
+        System.out.println ("UserDetailsServiceImpl.loadUserByUsername");
+        System.out.println ("username = " + username);
+
         SysUser user = userService.selectUserByUserName(username);
         if (StringUtils.isNull(user))
         {

@@ -1,6 +1,7 @@
 package com.ruoyi.quartz.controller;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,15 @@ import com.ruoyi.quartz.util.ScheduleUtils;
 
 /**
  * 调度任务信息操作处理，针对sys_job表
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:34
  */
 @RestController
 @RequestMapping("/monitor/job")
 public class SysJobController extends BaseController
 {
-    @Autowired
+    @Resource(name = "sysJobServiceImpl")
     private ISysJobService jobService;
 
     /**

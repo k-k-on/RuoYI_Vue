@@ -2,8 +2,9 @@ package com.ruoyi.common.exception.user;
 
 /**
  * 验证码错误异常类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 16:48
  */
 public class CaptchaException extends UserException
 {

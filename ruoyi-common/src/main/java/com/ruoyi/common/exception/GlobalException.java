@@ -3,7 +3,8 @@ package com.ruoyi.common.exception;
 /**
  * 全局异常
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:15
  */
 public class GlobalException extends RuntimeException
 {

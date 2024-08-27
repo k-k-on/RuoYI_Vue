@@ -9,9 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 线程相关工具类.
- * 
- * @author ruoyi
+ * 线程相关工具类
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 16:03
  */
 public class Threads
 {

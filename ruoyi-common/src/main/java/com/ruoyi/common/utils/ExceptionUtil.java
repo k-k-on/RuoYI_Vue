@@ -5,9 +5,10 @@ import java.io.StringWriter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 /**
- * 错误信息处理类。
+ * 错误信息处理类
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 16:05
  */
 public class ExceptionUtil
 {

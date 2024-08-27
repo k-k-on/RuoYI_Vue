@@ -18,19 +18,24 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 文件处理工具类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:23
  */
 public class FileUtils
 {
+    private static final Logger log = LoggerFactory.getLogger(FileUtils.class);
+
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
 
     /**
      * 输出指定文件的byte数组
-     * 
+     *
      * @param filePath 文件路径
      * @param os 输出流
      */
@@ -54,7 +59,7 @@ public class FileUtils
         }
         catch (IOException e)
         {
-            //throw e;
+            log.error("输出文件异常 {}", e.getMessage());
         }
         finally
         {
@@ -104,7 +109,7 @@ public class FileUtils
 
     /**
      * 删除文件
-     * 
+     *
      * @param filePath 文件
      * @return （说明）
      */
@@ -122,7 +127,7 @@ public class FileUtils
 
     /**
      * 文件名称验证
-     * 
+     *
      * @param filename 文件名称
      * @return true 正常 false 非法
      */
@@ -133,7 +138,7 @@ public class FileUtils
 
     /**
      * 检查文件是否可下载
-     * 
+     *
      * @param resource 需要下载的文件
      * @return true 正常 false 非法
      */
@@ -157,7 +162,7 @@ public class FileUtils
 
     /**
      * 下载文件名重新编码
-     * 
+     *
      * @param request 请求对象
      * @param fileName 文件名
      * @return 编码后的文件名
@@ -226,7 +231,7 @@ public class FileUtils
 
     /**
      * 获取图像后缀
-     * 
+     *
      * @param photoByte 图像数据
      * @return 后缀名
      */
@@ -255,7 +260,7 @@ public class FileUtils
 
     /**
      * 获取文件名称 /profile/upload/2022/04/16/ruoyi.png -- ruoyi.png
-     * 
+     *
      * @param fileName 路径名称
      * @return 没有文件路径的名称
      */
@@ -273,7 +278,7 @@ public class FileUtils
 
     /**
      * 获取不带后缀文件名称 /profile/upload/2022/04/16/ruoyi.png -- ruoyi
-     * 
+     *
      * @param fileName 路径名称
      * @return 没有文件路径和后缀的名称
      */

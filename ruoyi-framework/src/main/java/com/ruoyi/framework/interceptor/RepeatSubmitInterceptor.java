@@ -14,7 +14,8 @@ import com.ruoyi.common.utils.ServletUtils;
 /**
  * 防止重复提交拦截器
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 11:08
  */
 @Component
 public abstract class RepeatSubmitInterceptor implements HandlerInterceptor
@@ -45,7 +46,7 @@ public abstract class RepeatSubmitInterceptor implements HandlerInterceptor
      * @param request 请求信息
      * @param annotation 防重复注解参数
      * @return 结果
-     * @throws Exception
+     * @throws Exception t
      */
     public abstract boolean isRepeatSubmit(HttpServletRequest request, RepeatSubmit annotation);
 }

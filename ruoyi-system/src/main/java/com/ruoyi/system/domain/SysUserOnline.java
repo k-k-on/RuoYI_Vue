@@ -2,8 +2,9 @@ package com.ruoyi.system.domain;
 
 /**
  * 当前在线会话
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:44
  */
 public class SysUserOnline
 {

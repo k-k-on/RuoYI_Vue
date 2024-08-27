@@ -9,7 +9,8 @@ import com.ruoyi.common.utils.spring.SpringUtils;
 /**
  * 异步任务管理器
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/22 16:43
  */
 public class AsyncManager
 {
@@ -17,7 +18,6 @@ public class AsyncManager
     /**
      * 异步操作任务调度线程池
      */
-    /*字段可能为 'final' BY LMY*/
     private final ScheduledExecutorService executor = SpringUtils.getBean("scheduledExecutorService");
 
     /**
@@ -25,7 +25,6 @@ public class AsyncManager
      */
     private AsyncManager(){}
 
-    /*字段可能为 'final' BY LMY*/
     private static final AsyncManager me = new AsyncManager();
 
     public static AsyncManager me()

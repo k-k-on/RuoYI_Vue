@@ -3,10 +3,12 @@ package com.ruoyi.common.constant;
 import java.util.Locale;
 import io.jsonwebtoken.Claims;
 
+
 /**
  * 通用常量信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 16:24
  */
 public class Constants
 {

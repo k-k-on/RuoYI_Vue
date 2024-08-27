@@ -9,15 +9,16 @@ import com.ruoyi.framework.web.domain.Server;
 
 /**
  * 服务器监控
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:00
  */
 @RestController
 @RequestMapping("/monitor/server")
 public class ServerController
 {
     @PreAuthorize("@ss.hasPermi('monitor:server:list')")
-    @GetMapping()
+    @GetMapping
     public AjaxResult getInfo() throws Exception
     {
         Server server = new Server();

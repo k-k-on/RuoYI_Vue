@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义注解防止表单重复提交
- * 
- * @author ruoyi
  *
+ * @author LiMengYuan
+ * @date 2024/8/22 10:28
  */
 @Inherited
 @Target(ElementType.METHOD)

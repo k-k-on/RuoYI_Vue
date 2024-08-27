@@ -15,8 +15,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 认证失败处理类 返回未授权
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:12
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable

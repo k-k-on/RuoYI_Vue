@@ -6,8 +6,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 代码生成业务字段表 gen_table_column
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/26 9:59
  */
 public class GenTableColumn extends BaseEntity
 {
@@ -25,7 +26,7 @@ public class GenTableColumn extends BaseEntity
     /** 列描述 */
     private String columnComment;
 
-    /** 列类型 */
+    /** 列类型 （bigint， varchar，char等）*/
     private String columnType;
 
     /** JAVA类型 */
@@ -351,9 +352,7 @@ public class GenTableColumn extends BaseEntity
     public String readConverterExp()
     {
         String remarks = StringUtils.substringBetween(this.columnComment, "（", "）");
-        /*报告声明为 StringBuffer 的变量，并建议将它们替换为 StringBuilder。 StringBuilder 是 StringBuffer 的非线程安全替换。
-        * By LMY
-        */
+
         StringBuilder sb = new StringBuilder ();
         if (StringUtils.isNotEmpty(remarks))
         {
@@ -372,5 +371,29 @@ public class GenTableColumn extends BaseEntity
         {
             return this.columnComment;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GenTableColumn{" +
+                "columnId=" + columnId +
+                ", tableId=" + tableId +
+                ", columnName='" + columnName + '\'' +
+                ", columnComment='" + columnComment + '\'' +
+                ", columnType='" + columnType + '\'' +
+                ", javaType='" + javaType + '\'' +
+                ", javaField='" + javaField + '\'' +
+                ", isPk='" + isPk + '\'' +
+                ", isIncrement='" + isIncrement + '\'' +
+                ", isRequired='" + isRequired + '\'' +
+                ", isInsert='" + isInsert + '\'' +
+                ", isEdit='" + isEdit + '\'' +
+                ", isList='" + isList + '\'' +
+                ", isQuery='" + isQuery + '\'' +
+                ", queryType='" + queryType + '\'' +
+                ", htmlType='" + htmlType + '\'' +
+                ", dictType='" + dictType + '\'' +
+                ", sort=" + sort +
+                '}';
     }
 }

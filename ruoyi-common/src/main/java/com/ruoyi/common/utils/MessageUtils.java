@@ -6,8 +6,9 @@ import com.ruoyi.common.utils.spring.SpringUtils;
 
 /**
  * 获取i18n资源文件
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 16:04
  */
 public class MessageUtils
 {

@@ -148,7 +148,7 @@
             type="text"
             size="small"
             icon="el-icon-refresh"
-            @click="handleSynchDb(scope.row)"
+            @click="handlesyncDb(scope.row)"
             v-hasPermi="['tool:gen:edit']"
           >同步</el-button>
           <el-button
@@ -188,7 +188,7 @@
 </template>
 
 <script>
-import { listTable, previewTable, delTable, genCode, synchDb } from "@/api/tool/gen";
+import { listTable, previewTable, delTable, genCode, syncDb } from "@/api/tool/gen";
 import importTable from "./importTable";
 import createTable from "./createTable";
 import hljs from "highlight.js/lib/highlight";
@@ -294,10 +294,10 @@ export default {
       this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
     },
     /** 同步数据库操作 */
-    handleSynchDb(row) {
+    handlesyncDb(row) {
       const tableName = row.tableName;
       this.$modal.confirm('确认要强制同步"' + tableName + '"表结构吗？').then(function() {
-        return synchDb(tableName);
+        return syncDb(tableName);
       }).then(() => {
         this.$modal.msgSuccess("同步成功");
       }).catch(() => {});

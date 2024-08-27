@@ -9,8 +9,9 @@ import static com.google.code.kaptcha.Constants.*;
 
 /**
  * 验证码配置
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 15:11
  */
 @Configuration
 public class CaptchaConfig

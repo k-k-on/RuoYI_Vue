@@ -3,9 +3,10 @@ package com.ruoyi.framework.web.domain.server;
 import com.ruoyi.common.utils.Arith;
 
 /**
- * 內存相关信息
- * 
- * @author ruoyi
+ * 内存相关信息
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:39
  */
 public class Mem
 {

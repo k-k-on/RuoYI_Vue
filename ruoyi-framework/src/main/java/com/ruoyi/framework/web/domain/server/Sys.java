@@ -2,8 +2,9 @@ package com.ruoyi.framework.web.domain.server;
 
 /**
  * 系统相关信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:40
  */
 public class Sys
 {

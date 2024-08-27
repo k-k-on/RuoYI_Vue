@@ -12,13 +12,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 线程池配置
  *
- * @author ruoyi
- **/
+ * @author LiMengYuan
+ * @date 2024/8/27 11:20
+ */
 @Configuration
 public class ThreadPoolConfig
 {
     // 核心线程池大小
-    private int corePoolSize = 50;
+    private final int corePoolSize = 50;
 
     @Bean(name = "threadPoolTaskExecutor")
     public ThreadPoolTaskExecutor threadPoolTaskExecutor()

@@ -7,8 +7,9 @@ import com.ruoyi.common.utils.sql.SqlUtil;
 
 /**
  * 分页工具类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 16:05
  */
 public class PageUtils extends PageHelper
 {

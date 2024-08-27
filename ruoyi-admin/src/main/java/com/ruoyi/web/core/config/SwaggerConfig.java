@@ -22,16 +22,19 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
+
 /**
  * Swagger2的接口配置
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 11:38
  */
 @Configuration
 public class SwaggerConfig
 {
     /** 系统基础配置 */
-    @Autowired
+    @Resource(name = "ruoYiConfig")
     private RuoYiConfig ruoyiConfig;
 
     /** 是否开启swagger */

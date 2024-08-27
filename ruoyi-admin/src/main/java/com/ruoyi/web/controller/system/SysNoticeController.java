@@ -22,8 +22,9 @@ import com.ruoyi.system.service.ISysNoticeService;
 
 /**
  * 公告 信息操作处理
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 16:00
  */
 @RestController
 @RequestMapping("/system/notice")

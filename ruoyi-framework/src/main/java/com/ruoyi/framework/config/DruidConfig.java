@@ -26,8 +26,9 @@ import com.ruoyi.framework.datasource.DynamicDataSource;
 
 /**
  * druid 配置多数据源
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:03
  */
 @Configuration
 public class DruidConfig
@@ -55,13 +56,15 @@ public class DruidConfig
     {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
-        setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
+        if(SpringUtils.containsBean("slaveDataSource")) {
+            setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
+        }
         return new DynamicDataSource(masterDataSource, targetDataSources);
     }
-    
+
     /**
      * 设置数据源
-     * 
+     *
      * @param targetDataSources 备选数据源集合
      * @param sourceName 数据源名称
      * @param beanName bean名称
@@ -74,7 +77,7 @@ public class DruidConfig
             targetDataSources.put(sourceName, dataSource);
         }
         catch (Exception e) {
-            //throw new RuntimeException (e);
+            throw new RuntimeException (e);
         }
     }
 

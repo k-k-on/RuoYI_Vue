@@ -18,7 +18,8 @@ import com.ruoyi.common.utils.StringUtils;
 /**
  * 图片处理工具类
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:24
  */
 public class ImageUtils
 {
@@ -33,7 +34,7 @@ public class ImageUtils
         }
         catch (Exception e)
         {
-            log.error("图片加载异常 {}", e);
+            log.error("图片加载异常 {}", e.getMessage());
             return null;
         }
         finally
@@ -52,14 +53,14 @@ public class ImageUtils
         }
         catch (Exception e)
         {
-            log.error("获取图片异常 {}", e);
+            log.error("获取图片异常 {}", e.getMessage());
         }
         return null;
     }
 
     /**
      * 读取文件为字节数据
-     * 
+     *
      * @param url 地址
      * @return 字节数据
      */
@@ -89,7 +90,7 @@ public class ImageUtils
         }
         catch (Exception e)
         {
-            log.error("获取文件路径异常 {}", e);
+            log.error("获取文件路径异常 {}", e.getMessage());
             return null;
         }
         finally

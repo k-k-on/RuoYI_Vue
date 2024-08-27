@@ -12,7 +12,8 @@ import com.ruoyi.common.enums.DesensitizedType;
 /**
  * 数据脱敏注解
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/22 10:28
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

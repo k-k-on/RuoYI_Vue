@@ -21,8 +21,9 @@ import com.ruoyi.common.utils.html.EscapeUtil;
 
 /**
  * 全局异常处理器
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:27
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

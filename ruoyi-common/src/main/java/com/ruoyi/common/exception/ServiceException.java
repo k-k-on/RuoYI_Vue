@@ -3,7 +3,8 @@ package com.ruoyi.common.exception;
 /**
  * 业务异常
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/21 10:11
  */
 public final class ServiceException extends RuntimeException
 {

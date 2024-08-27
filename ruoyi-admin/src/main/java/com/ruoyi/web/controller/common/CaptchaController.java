@@ -22,8 +22,9 @@ import com.ruoyi.system.service.ISysConfigService;
 
 /**
  * 验证码操作处理
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 15:05
  */
 @RestController
 public class CaptchaController
@@ -36,11 +37,16 @@ public class CaptchaController
 
     @Autowired
     private RedisCache redisCache;
-    
+
     @Autowired
     private ISysConfigService configService;
+
     /**
      * 生成验证码
+     *
+     * @param response
+     * @return AjaxResult
+     * @date 2024/8/21 16:30
      */
     @GetMapping("/captchaImage")
     public AjaxResult getCode(HttpServletResponse response) {
@@ -56,7 +62,7 @@ public class CaptchaController
 
         // 保存验证码信息
         String uuid = IdUtils.simpleUUID(); // 获取简化的UUID，去掉了横线
-        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;  // reids存储的名称：CAPTCHA_CODE_KEY+uuid
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;  // redis存储的名称：CAPTCHA_CODE_KEY+uuid
 
         String capStr, code = null;
         BufferedImage image = null;
@@ -78,7 +84,7 @@ public class CaptchaController
             code = capText.substring(capText.lastIndexOf("@") + 1);
             image = captchaProducerMath.createImage(capStr);
         }
-        else if ("char".equals(captchaType))  // 验证码类型是char
+        else if ("char".equals(captchaType))  //验证码类型是char
         {
             capStr = code = captchaProducer.createText();
             image = captchaProducer.createImage(capStr);
@@ -90,8 +96,9 @@ public class CaptchaController
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try
         {
-            /*实参 'image' 可能为null*/
-            ImageIO.write(image, "jpg", os);
+            if (image != null) {
+                ImageIO.write(image, "jpg", os);
+            }
         }
         catch (IOException e)
         {

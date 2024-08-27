@@ -8,9 +8,10 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * 登录用户身份权限
- * 
- * @author ruoyi
+ * 登录用户身份权限，继承了spring security包中的UserDetails接口
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 10:54
  */
 public class LoginUser implements UserDetails
 {
@@ -144,8 +145,9 @@ public class LoginUser implements UserDetails
 
     /**
      * 指定用户是否解锁,锁定的用户无法进行身份验证
-     * 
-     * @return （说明）
+     *
+     * @return boolean ture 未锁定
+     * @date 2024/8/21 11:09
      */
     @JSONField(serialize = false)
     @Override
@@ -154,10 +156,12 @@ public class LoginUser implements UserDetails
         return true;
     }
 
+
     /**
      * 指示是否已过期的用户的凭据(密码),过期的凭据防止认证
-     * 
-     * @return （说明）
+     *
+     * @return boolean true
+     * @date 2024/8/21 11:11
      */
     @JSONField(serialize = false)
     @Override
@@ -168,7 +172,7 @@ public class LoginUser implements UserDetails
 
     /**
      * 是否可用 ,禁用的用户不能身份验证
-     * 
+     *
      * @return （说明）
      */
     @JSONField(serialize = false)

@@ -30,8 +30,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * Mybatis支持*匹配扫描包
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 11:52
  */
 @Configuration
 public class MyBatisConfig
@@ -70,8 +71,6 @@ public class MyBatisConfig
                             }
                             catch (ClassNotFoundException e)
                             {
-                                /*调用 'printStackTrace()' By LMY*/
-                                //e.printStackTrace();
                                 log.error("异常信息:{}", e.getMessage());
                             }
                         }
@@ -94,8 +93,6 @@ public class MyBatisConfig
         }
         catch (IOException e)
         {
-            /*调用 'printStackTrace()' By LMY*/
-            //e.printStackTrace();
             log.error("异常信息:{}", e.getMessage());
         }
         return typeAliasesPackage;

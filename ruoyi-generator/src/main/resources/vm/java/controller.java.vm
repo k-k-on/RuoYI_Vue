@@ -1,6 +1,7 @@
 package ${packageName}.controller;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * ${functionName}Controller
- * 
+ *
  * @author ${author}
  * @date ${datetime}
  */
@@ -34,7 +35,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/${moduleName}/${businessName}")
 public class ${ClassName}Controller extends BaseController
 {
-    @Autowired
+    @Resource
     private I${ClassName}Service ${className}Service;
 
     /**
@@ -46,18 +47,12 @@ public class ${ClassName}Controller extends BaseController
     public TableDataInfo list(${ClassName} ${className})
     {
         startPage();
-        #*报告类型形参被忽略的泛型类。 这种对泛型类型的原始使用在 Java 中虽然有效，但它违背了类型形参的用途，并且可能掩盖错误。 此检查反映出 javac 的 rawtypes 警告。
-        * By LMY
-        *#
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         return getDataTable(list);
     }
 #elseif($table.tree)
     public AjaxResult list(${ClassName} ${className})
     {
-        #*报告类型形参被忽略的泛型类。 这种对泛型类型的原始使用在 Java 中虽然有效，但它违背了类型形参的用途，并且可能掩盖错误。 此检查反映出 javac 的 rawtypes 警告。
-        * By LMY
-        *#
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         return success(list);
     }
@@ -71,9 +66,6 @@ public class ${ClassName}Controller extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, ${ClassName} ${className})
     {
-        #*报告类型形参被忽略的泛型类。 这种对泛型类型的原始使用在 Java 中虽然有效，但它违背了类型形参的用途，并且可能掩盖错误。 此检查反映出 javac 的 rawtypes 警告。
-        * By LMY
-        *#
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}.class);
         util.exportExcel(response, list, "${functionName}数据");

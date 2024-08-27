@@ -7,7 +7,8 @@ import com.ruoyi.generator.domain.GenTable;
 /**
  * 业务 服务层
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/23 11:56
  */
 public interface IGenTableService
 {
@@ -108,7 +109,7 @@ public interface IGenTableService
      *
      * @param tableName 表名称
      */
-    void synchDb(String tableName);
+    void syncDb(String tableName);
 
     /**
      * 批量生成代码（下载方式）

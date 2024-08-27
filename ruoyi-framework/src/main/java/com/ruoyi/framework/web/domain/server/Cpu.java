@@ -4,8 +4,9 @@ import com.ruoyi.common.utils.Arith;
 
 /**
  * CPU相关信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:38
  */
 public class Cpu
 {

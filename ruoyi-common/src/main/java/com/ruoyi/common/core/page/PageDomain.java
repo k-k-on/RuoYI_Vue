@@ -4,8 +4,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 分页数据
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:01
  */
 public class PageDomain
 {

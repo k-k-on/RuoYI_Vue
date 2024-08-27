@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 /**
  * 文件上传 误异常类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:09
  */
 public class InvalidExtensionException extends FileUploadException
 {
     private static final long serialVersionUID = 1L;
 
-    /*字段可能为 'final' BY LMY*/
     private final String[] allowedExtension;
     private final String extension;
     private final String filename;

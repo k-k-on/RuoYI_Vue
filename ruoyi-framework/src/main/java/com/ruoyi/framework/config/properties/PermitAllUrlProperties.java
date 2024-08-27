@@ -20,8 +20,9 @@ import com.ruoyi.common.annotation.Anonymous;
 
 /**
  * 设置Anonymous注解允许匿名访问的url
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 10:50
  */
 @Configuration
 public class PermitAllUrlProperties implements InitializingBean, ApplicationContextAware

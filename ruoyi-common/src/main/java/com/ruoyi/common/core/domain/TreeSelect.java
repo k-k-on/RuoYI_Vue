@@ -8,9 +8,10 @@ import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.domain.entity.SysMenu;
 
 /**
- * Treeselect树结构实体类
- * 
- * @author ruoyi
+ * Tree select树结构实体类
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:00
  */
 public class TreeSelect implements Serializable
 {

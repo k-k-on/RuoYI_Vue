@@ -8,8 +8,9 @@ import java.util.regex.Pattern;
 
 /**
  * 自定义xss校验注解实现
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 16:05
  */
 public class XssValidator implements ConstraintValidator<Xss, String>
 {

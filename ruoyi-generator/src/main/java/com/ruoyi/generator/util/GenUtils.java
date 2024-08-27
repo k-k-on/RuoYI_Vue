@@ -10,23 +10,28 @@ import com.ruoyi.generator.domain.GenTableColumn;
 
 /**
  * 代码生成器 工具类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/26 9:59
  */
 public class GenUtils
 {
     /**
      * 初始化表信息
+     *
+     * @param genTable 表信息
+     * @param operName 操作人
+     * @date 2024/8/26 15:30
      */
     public static void initTable(GenTable genTable, String operName)
     {
-        genTable.setClassName(convertClassName(genTable.getTableName()));
-        genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
-        genTable.setBusinessName(getBusinessName(genTable.getTableName()));
-        genTable.setFunctionName(replaceText(genTable.getTableComment()));
-        genTable.setFunctionAuthor(GenConfig.getAuthor());
-        genTable.setCreateBy(operName);
+        genTable.setClassName(convertClassName(genTable.getTableName())); //类名
+        genTable.setPackageName(GenConfig.getPackageName()); //包名
+        genTable.setModuleName(getModuleName(GenConfig.getPackageName())); //模块名
+        genTable.setBusinessName(getBusinessName(genTable.getTableName())); //业务名
+        genTable.setFunctionName(replaceText(genTable.getTableComment())); //功能名
+        genTable.setFunctionAuthor(GenConfig.getAuthor()); //功能模块作者
+        genTable.setCreateBy(operName); //创建人
     }
 
     /**
@@ -44,19 +49,23 @@ public class GenUtils
         column.setJavaType(GenConstants.TYPE_STRING);
         column.setQueryType(GenConstants.QUERY_EQ);
 
-        if (arraysContains(GenConstants.COLUMNTYPE_STR, dataType) || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType))
+        //System.out.println ("column = " + column);
+
+        //判断数据类型是否为string或text
+        if (arraysContains(GenConstants.COLUMN_TYPE_STR, dataType) || arraysContains(GenConstants.COLUMN_TYPE_TEXT, dataType))
         {
             // 字符串长度超过500设置为文本域
             Integer columnLength = getColumnLength(column.getColumnType());
-            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType) ? GenConstants.HTML_TEXTAREA : GenConstants.HTML_INPUT;
+            //文本数据或数据大小大于500，设为textarea类型，否则为input类型（input文本框、textarea文本域）
+            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMN_TYPE_TEXT, dataType) ? GenConstants.HTML_TEXTAREA : GenConstants.HTML_INPUT;
             column.setHtmlType(htmlType);
         }
-        else if (arraysContains(GenConstants.COLUMNTYPE_TIME, dataType))
+        else if (arraysContains(GenConstants.COLUMN_TYPE_TIME, dataType)) //判断数据类型是否为time
         {
             column.setJavaType(GenConstants.TYPE_DATE);
             column.setHtmlType(GenConstants.HTML_DATETIME);
         }
-        else if (arraysContains(GenConstants.COLUMNTYPE_NUMBER, dataType))
+        else if (arraysContains(GenConstants.COLUMN_TYPE_NUMBER, dataType)) //判断数据类型是否为number
         {
             column.setHtmlType(GenConstants.HTML_INPUT);
 
@@ -82,17 +91,17 @@ public class GenUtils
         column.setIsInsert(GenConstants.REQUIRE);
 
         // 编辑字段
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_EDIT, columnName) && !column.isPk())
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_EDIT, columnName) && !column.isPk())
         {
             column.setIsEdit(GenConstants.REQUIRE);
         }
         // 列表字段
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_LIST, columnName) && !column.isPk())
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_LIST, columnName) && !column.isPk())
         {
             column.setIsList(GenConstants.REQUIRE);
         }
         // 查询字段
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_QUERY, columnName) && !column.isPk())
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_QUERY, columnName) && !column.isPk())
         {
             column.setIsQuery(GenConstants.REQUIRE);
         }
@@ -132,7 +141,7 @@ public class GenUtils
 
     /**
      * 校验数组是否包含指定值
-     * 
+     *
      * @param arr 数组
      * @param targetValue 值
      * @return 是否包含
@@ -144,7 +153,7 @@ public class GenUtils
 
     /**
      * 获取模块名
-     * 
+     *
      * @param packageName 包名
      * @return 模块名
      */
@@ -157,7 +166,7 @@ public class GenUtils
 
     /**
      * 获取业务名
-     * 
+     *
      * @param tableName 表名
      * @return 业务名
      */
@@ -170,7 +179,7 @@ public class GenUtils
 
     /**
      * 表名转换成Java类名
-     * 
+     *
      * @param tableName 表名称
      * @return 类名
      */
@@ -188,7 +197,7 @@ public class GenUtils
 
     /**
      * 批量替换前缀
-     * 
+     *
      * @param replacementm 替换值
      * @param searchList 替换列表
      * @return （说明）
@@ -209,7 +218,7 @@ public class GenUtils
 
     /**
      * 关键字替换
-     * 
+     *
      * @param text 需要被替换的名字
      * @return 替换后的名字
      */
@@ -220,9 +229,9 @@ public class GenUtils
 
     /**
      * 获取数据库类型字段
-     * 
+     *
      * @param columnType 列类型
-     * @return 截取后的列类型
+     * @return String 截取后的列类型
      */
     public static String getDbType(String columnType)
     {
@@ -237,10 +246,10 @@ public class GenUtils
     }
 
     /**
-     * 获取字段长度
-     * 
+     * 获取字段长度，括号部分内容，没有括号则默认为0
+     *
      * @param columnType 列类型
-     * @return 截取后的列类型
+     * @return 字段长度（没指定默认为0）
      */
     public static Integer getColumnLength(String columnType)
     {

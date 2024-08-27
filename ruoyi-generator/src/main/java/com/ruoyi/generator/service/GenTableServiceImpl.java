@@ -36,20 +36,23 @@ import com.ruoyi.generator.util.GenUtils;
 import com.ruoyi.generator.util.VelocityInitializer;
 import com.ruoyi.generator.util.VelocityUtils;
 
+import javax.annotation.Resource;
+
 /**
  * 业务 服务层实现
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/23 11:55
  */
 @Service
 public class GenTableServiceImpl implements IGenTableService
 {
     private static final Logger log = LoggerFactory.getLogger(GenTableServiceImpl.class);
 
-    @Autowired
+    @Resource
     private GenTableMapper genTableMapper;
 
-    @Autowired
+    @Resource
     private GenTableColumnMapper genTableColumnMapper;
 
     /**
@@ -163,6 +166,9 @@ public class GenTableServiceImpl implements IGenTableService
      * 导入表结构
      *
      * @param tableList 导入表列表
+     * @param operName 操作人
+     * @throws ServiceException 导入失败
+     * @date 2024/8/26 15:27
      */
     @Override
     @Transactional
@@ -291,7 +297,7 @@ public class GenTableServiceImpl implements IGenTableService
      */
     @Override
     @Transactional
-    public void synchDb(String tableName)
+    public void syncDb(String tableName)
     {
         GenTable table = genTableMapper.selectGenTableByName(tableName);
         List<GenTableColumn> tableColumns = table.getColumns();

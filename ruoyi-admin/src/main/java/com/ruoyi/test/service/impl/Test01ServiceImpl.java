@@ -6,22 +6,25 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.test.mapper.Test01Mapper;
 import com.ruoyi.test.domain.Test01;
 import com.ruoyi.test.service.ITest01Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 /**
  * 测试Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-06-24
  */
 @Service
-public class Test01ServiceImpl implements ITest01Service 
+public class Test01ServiceImpl implements ITest01Service
 {
-    @Autowired
+    @Resource
     private Test01Mapper test01Mapper;
 
     /**
      * 查询测试
-     * 
+     *
      * @param id 测试主键
      * @return 测试
      */
@@ -33,7 +36,7 @@ public class Test01ServiceImpl implements ITest01Service
 
     /**
      * 查询测试列表
-     * 
+     *
      * @param test01 测试
      * @return 测试
      */
@@ -45,7 +48,7 @@ public class Test01ServiceImpl implements ITest01Service
 
     /**
      * 新增测试
-     * 
+     *
      * @param test01 测试
      * @return 结果
      */
@@ -57,7 +60,7 @@ public class Test01ServiceImpl implements ITest01Service
 
     /**
      * 修改测试
-     * 
+     *
      * @param test01 测试
      * @return 结果
      */
@@ -69,7 +72,7 @@ public class Test01ServiceImpl implements ITest01Service
 
     /**
      * 批量删除测试
-     * 
+     *
      * @param ids 需要删除的测试主键
      * @return 结果
      */
@@ -81,7 +84,7 @@ public class Test01ServiceImpl implements ITest01Service
 
     /**
      * 删除测试信息
-     * 
+     *
      * @param id 测试主键
      * @return 结果
      */

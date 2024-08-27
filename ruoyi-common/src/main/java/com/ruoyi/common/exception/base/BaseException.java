@@ -5,8 +5,9 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 基础异常
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:07
  */
 public class BaseException extends RuntimeException
 {
@@ -15,7 +16,6 @@ public class BaseException extends RuntimeException
     /**
      * 所属模块
      */
-    /*字段可能为 'final' BY LMY*/
     private final String module;
 
     /**

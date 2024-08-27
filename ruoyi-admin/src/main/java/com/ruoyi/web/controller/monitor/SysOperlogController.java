@@ -21,8 +21,9 @@ import com.ruoyi.system.service.ISysOperLogService;
 
 /**
  * 操作日志记录
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:01
  */
 @RestController
 @RequestMapping("/monitor/operlog")

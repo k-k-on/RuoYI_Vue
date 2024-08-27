@@ -123,7 +123,7 @@ export default {
       // 验证码开关,从后台传入，来源在redis的sys.account.captchaEnabled中
       captchaEnabled: false,
       // 注册开关
-      register: false,
+      register: true,
       redirect: undefined
     };
   },

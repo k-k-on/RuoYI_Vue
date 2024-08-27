@@ -3,6 +3,7 @@ package com.ruoyi.framework.web.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 /**
  * token验证处理
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 11:36
  */
 @Component
 public class TokenService
@@ -51,13 +53,18 @@ public class TokenService
 
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
+
+
 
     /**
      * 获取用户身份信息
      *
-     * @return 用户信息
+     * @param request 请求
+     * @return LoginUser token对应的用户信息
+     * @throws Exception 获取用户信息异常
+     * @date 2024/8/19 16:46
      */
     public LoginUser getLoginUser(HttpServletRequest request)
     {
@@ -67,6 +74,7 @@ public class TokenService
         {
             try
             {
+                //获取Payload部分
                 Claims claims = parseToken(token);
                 // 解析对应的权限以及用户信息
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
@@ -122,11 +130,12 @@ public class TokenService
         return createToken(claims);
     }
 
+
     /**
      * 验证令牌有效期，相差不足20分钟，自动刷新缓存
      *
-     * @param loginUser
-     * @return 令牌
+     * @param loginUser 用户信息
+     * @date 2024/8/19 16:49
      */
     public void verifyToken(LoginUser loginUser)
     {
@@ -181,10 +190,10 @@ public class TokenService
     }
 
     /**
-     * 从令牌中获取数据声明
+     * 从令牌中获取数据声明，解密Payload部分
      *
      * @param token 令牌
-     * @return 数据声明
+     * @return Claims 数据声明
      */
     private Claims parseToken(String token)
     {
@@ -206,17 +215,22 @@ public class TokenService
         return claims.getSubject();
     }
 
+
     /**
      * 获取请求token
      *
-     * @param request
-     * @return token
+     * @param request 请求信息
+     * @return token 返回去除前缀的token
+     * @date 2024/8/19 16:03
      */
     private String getToken(HttpServletRequest request)
     {
+        //获取token，格式Bearer xxx.xxx.xxx
         String token = request.getHeader(header);
+        //token不为空，且前缀正确
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
         {
+            //去除前缀，格式xxx.xxx.xxx
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;

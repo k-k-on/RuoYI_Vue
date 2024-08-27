@@ -8,8 +8,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 操作日志记录表 oper_log
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:43
  */
 public class SysOperLog extends BaseEntity
 {

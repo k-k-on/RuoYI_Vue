@@ -23,8 +23,9 @@ import com.ruoyi.common.utils.sql.SqlUtil;
 
 /**
  * web层通用数据处理
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 16:15
  */
 public class BaseController
 {
@@ -113,7 +114,7 @@ public class BaseController
     {
         return AjaxResult.success(message);
     }
-    
+
     /**
      * 返回成功消息
      */
@@ -140,7 +141,7 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
      * @param rows 影响行数
      * @return 操作结果
      */
@@ -151,7 +152,7 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
      * @param result 结果
      * @return 操作结果
      */

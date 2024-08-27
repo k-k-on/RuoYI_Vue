@@ -18,7 +18,8 @@ import com.ruoyi.common.utils.uuid.Seq;
 /**
  * 文件上传工具类
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:20
  */
 public class FileUploadUtils
 {
@@ -52,7 +53,7 @@ public class FileUploadUtils
      *
      * @param file 上传的文件
      * @return 文件名称
-     * @throws Exception （说明）
+     * @throws IOException （说明）
      */
     public static String upload(MultipartFile file) throws IOException
     {

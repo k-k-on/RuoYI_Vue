@@ -4,8 +4,9 @@ import com.ruoyi.common.exception.base.BaseException;
 
 /**
  * 文件信息异常类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:07
  */
 public class FileException extends BaseException
 {

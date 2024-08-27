@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 
 /**
  * 数据权限过滤注解
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 10:23
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

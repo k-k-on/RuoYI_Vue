@@ -18,8 +18,9 @@ import com.ruoyi.common.utils.DateUtils;
 
 /**
  * 反射工具类. 提供调用getter/setter方法, 访问私有变量, 调用私有方法, 获取泛型类型Class, 被AOP过的真实类等工具函数.
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 9:55
  */
 @SuppressWarnings("rawtypes")
 public class ReflectUtils
@@ -30,7 +31,6 @@ public class ReflectUtils
 
     private static final String CGLIB_CLASS_SEPARATOR = "$$";
 
-    /*字段可能为 'final' BY LMY*/
     private static final Logger logger = LoggerFactory.getLogger(ReflectUtils.class);
 
     /**

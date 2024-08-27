@@ -89,8 +89,9 @@ import com.ruoyi.common.utils.reflect.ReflectUtils;
 
 /**
  * Excel相关处理
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 11:13
  */
 public class ExcelUtil<T>
 {
@@ -148,7 +149,7 @@ public class ExcelUtil<T>
     /**
      * 当前行号
      */
-    private int rownum;
+    private int rowNum;
 
     /**
      * 标题
@@ -183,7 +184,6 @@ public class ExcelUtil<T>
     /**
      * 统计列表
      */
-    /*字段可能为 'final' BY LMY*/
     private final Map<Integer, Double> statistics = new HashMap<> ();
 
     /**
@@ -206,9 +206,6 @@ public class ExcelUtil<T>
         this.clazz = clazz;
     }
 
-    /*Javadoc 声明问题
-    * By Li
-    * */
     /**
      * 隐藏Excel中列属性
      *
@@ -249,7 +246,7 @@ public class ExcelUtil<T>
             {
                 titleLastCol = titleLastCol + subFields.size() - 1;
             }
-            Row titleRow = sheet.createRow(rownum == 0 ? rownum++ : 0);
+            Row titleRow = sheet.createRow(rowNum == 0 ? rowNum++ : 0);
             titleRow.setHeightInPoints(30);
             Cell titleCell = titleRow.createCell(0);
             titleCell.setCellStyle(styles.get("title"));
@@ -267,7 +264,7 @@ public class ExcelUtil<T>
         {
             subMergedFirstRowNum++;
             subMergedLastRowNum++;
-            Row subRow = sheet.createRow(rownum);
+            Row subRow = sheet.createRow(rowNum);
             int excelNum = 0;
             for (Object[] objects : fields)
             {
@@ -281,15 +278,15 @@ public class ExcelUtil<T>
             int headLastRow = headFirstRow + subFields.size() - 1;
             if (headLastRow > headFirstRow)
             {
-                sheet.addMergedRegion(new CellRangeAddress(rownum, rownum, headFirstRow, headLastRow));
+                sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, headFirstRow, headLastRow));
             }
-            rownum++;
+            rowNum++;
         }
     }
 
     /**
      * 对excel表单默认第一个索引名转换成list
-     * 
+     *
      * @param is 输入流
      * @return 转换后集合
      */
@@ -314,7 +311,7 @@ public class ExcelUtil<T>
 
     /**
      * 对excel表单默认第一个索引名转换成list
-     * 
+     *
      * @param is 输入流
      * @param titleNum 标题占用行数
      * @return 转换后集合
@@ -326,7 +323,7 @@ public class ExcelUtil<T>
 
     /**
      * 对excel表单指定表格索引名转换成list
-     * 
+     *
      * @param sheetName 表格索引名
      * @param titleNum 标题占用行数
      * @param is 输入流
@@ -343,6 +340,7 @@ public class ExcelUtil<T>
         {
             throw new IOException("文件sheet不存在");
         }
+        //HSSFWorkbook对应于xls文件， XSSFWorkbook应于xlsx文件
         boolean isXSSFWorkbook = !(wb instanceof HSSFWorkbook);
         Map<String, PictureData> pictures;
         if (isXSSFWorkbook)
@@ -361,6 +359,7 @@ public class ExcelUtil<T>
             Map<String, Integer> cellMap = new HashMap<> ();
             // 获取表头
             Row heard = sheet.getRow(titleNum);
+            //getPhysicalNumberOfCells 是获取不为空的列个数
             for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++)
             {
                 Cell cell = heard.getCell(i);
@@ -407,6 +406,7 @@ public class ExcelUtil<T>
                     Excel attr = (Excel) entry.getValue()[1];
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
+                    //是否为String类型
                     if (String.class == fieldType)
                     {
                         String s = Convert.toStr(val);
@@ -427,26 +427,32 @@ public class ExcelUtil<T>
                             }
                         }
                     }
+                    //是否为int或Integer类型
                     else if ((Integer.TYPE == fieldType || Integer.class == fieldType) && StringUtils.isNumeric(Convert.toStr(val)))
                     {
                         val = Convert.toInt(val);
                     }
+                    //是否为long或Long类型
                     else if ((Long.TYPE == fieldType || Long.class == fieldType) && StringUtils.isNumeric(Convert.toStr(val)))
                     {
                         val = Convert.toLong(val);
                     }
+                    //是否为double或Double类型
                     else if (Double.TYPE == fieldType || Double.class == fieldType)
                     {
                         val = Convert.toDouble(val);
                     }
+                    //是否为float或Float类型
                     else if (Float.TYPE == fieldType || Float.class == fieldType)
                     {
                         val = Convert.toFloat(val);
                     }
+                    //是否为BigDecimal类型
                     else if (BigDecimal.class == fieldType)
                     {
                         val = Convert.toBigDecimal(val);
                     }
+                    //是否为Date类型
                     else if (Date.class == fieldType)
                     {
                         if (val instanceof String)
@@ -458,6 +464,7 @@ public class ExcelUtil<T>
                             val = DateUtil.getJavaDate((Double) val);
                         }
                     }
+                    //是否为boolean或Boolean类型
                     else if (Boolean.TYPE == fieldType || Boolean.class == fieldType)
                     {
                         val = Convert.toBool(val, false);
@@ -510,7 +517,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param list 导出数据集合
      * @param sheetName 工作表的名称
      * @return 结果
@@ -522,7 +529,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param list 导出数据集合
      * @param sheetName 工作表的名称
      * @param title 标题
@@ -536,7 +543,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param response 返回数据
      * @param list 导出数据集合
      * @param sheetName 工作表的名称
@@ -548,7 +555,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param response 返回数据
      * @param list 导出数据集合
      * @param sheetName 工作表的名称
@@ -564,23 +571,23 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param sheetName 工作表的名称
      * @return 结果
      */
-    public AjaxResult importTemplateExcel(String sheetName)
+    public AjaxResult downloadTemplateExcel(String sheetName)
     {
-        return importTemplateExcel(sheetName, StringUtils.EMPTY);
+        return downloadTemplateExcel (sheetName, StringUtils.EMPTY);
     }
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param sheetName 工作表的名称
      * @param title 标题
      * @return 结果
      */
-    public AjaxResult importTemplateExcel(String sheetName, String title)
+    public AjaxResult downloadTemplateExcel(String sheetName, String title)
     {
         this.init(null, sheetName, title, Type.IMPORT);
         return exportExcel();
@@ -588,21 +595,21 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param sheetName 工作表的名称
      */
-    public void importTemplateExcel(HttpServletResponse response, String sheetName)
+    public void downloadTemplateExcel(HttpServletResponse response, String sheetName)
     {
-        importTemplateExcel(response, sheetName, StringUtils.EMPTY);
+        downloadTemplateExcel (response, sheetName, StringUtils.EMPTY);
     }
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param sheetName 工作表的名称
      * @param title 标题
      */
-    public void importTemplateExcel(HttpServletResponse response, String sheetName, String title)
+    public void downloadTemplateExcel(HttpServletResponse response, String sheetName, String title)
     {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");//设置HTTP响应的Content-Type头部字段
         response.setCharacterEncoding("utf-8");//设置响应对象字符编码
@@ -633,7 +640,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @return 结果
      */
     public AjaxResult exportExcel()
@@ -671,7 +678,7 @@ public class ExcelUtil<T>
             createSheet(sheetNo, index);
 
             // 产生一行
-            Row row = sheet.createRow(rownum);
+            Row row = sheet.createRow(rowNum);
             int column = 0;
             // 写入各个字段的列头名称
             for (Object[] os : fields)
@@ -709,11 +716,11 @@ public class ExcelUtil<T>
     {
         int startNo = index * sheetSize;
         int endNo = Math.min(startNo + sheetSize, list.size());
-        int rowNo = (1 + rownum) - startNo;
+        int rowNo = (1 + rowNum) - startNo;
         Row row;
         for (int i = startNo; i < endNo; i++)
         {
-            rowNo = isSubList() ? (i > 1 ? rowNo + 1 : rowNo + i) : i + 1 + rownum - startNo;
+            rowNo = isSubList() ? (i > 1 ? rowNo + 1 : rowNo + i) : i + 1 + rowNum - startNo;
             row = sheet.createRow (rowNo);
             // 得到导出对象.
             T vo = list.get(i);
@@ -772,7 +779,7 @@ public class ExcelUtil<T>
 
     /**
      * 创建表格样式
-     * 
+     *
      * @param wb 工作薄对象
      * @return 样式列表
      */
@@ -827,7 +834,7 @@ public class ExcelUtil<T>
 
     /**
      * 根据Excel注解创建表格头样式
-     * 
+     *
      * @param wb 工作薄对象
      * @return 自定义样式列表
      */
@@ -863,7 +870,7 @@ public class ExcelUtil<T>
 
     /**
      * 根据Excel注解创建表格列样式
-     * 
+     *
      * @param wb 工作薄对象
      * @return 自定义样式列表
      */
@@ -895,7 +902,7 @@ public class ExcelUtil<T>
 
     /**
      * 根据Excel注解创建表格列样式
-     * 
+     *
      * @param styles 自定义样式列表
      * @param field  属性列信息
      * @param excel  注解信息
@@ -949,7 +956,7 @@ public class ExcelUtil<T>
             sheet.setDefaultColumnStyle(column, styles.get(StringUtils.format("data_{}_{}_{}_{}", attr.align(), attr.color(), attr.backgroundColor(), attr.cellType())));
             if (attr.needMerge())
             {
-                sheet.addMergedRegion(new CellRangeAddress(rownum - 1, rownum, column, column));
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum, column, column));
             }
         }
         return cell;
@@ -957,7 +964,7 @@ public class ExcelUtil<T>
 
     /**
      * 设置单元格信息
-     * 
+     *
      * @param value 单元格值
      * @param attr 注解相关
      * @param cell 单元格信息
@@ -1141,7 +1148,7 @@ public class ExcelUtil<T>
 
     /**
      * 设置 POI XSSFSheet 单元格提示或选择框
-     * 
+     *
      * @param sheet 表单
      * @param textlist 下拉框显示的内容
      * @param promptContent 提示内容
@@ -1178,7 +1185,7 @@ public class ExcelUtil<T>
 
     /**
      * 设置某些列的值只能输入预制的数据,显示下拉框（兼容超出一定数量的下拉框）.
-     * 
+     *
      * @param sheet 要设置的sheet.
      * @param textlist 下拉框显示的内容
      * @param promptContent 提示内容
@@ -1230,7 +1237,7 @@ public class ExcelUtil<T>
 
     /**
      * 解析导出值 0=男,1=女,2=未知
-     * 
+     *
      * @param propertyValue 参数值
      * @param converterExp 翻译注解
      * @param separator 分隔符
@@ -1267,7 +1274,7 @@ public class ExcelUtil<T>
 
     /**
      * 反向解析值 男=0,女=1,未知=2
-     * 
+     *
      * @param propertyValue 参数值
      * @param converterExp 翻译注解
      * @param separator 分隔符
@@ -1304,7 +1311,7 @@ public class ExcelUtil<T>
 
     /**
      * 解析字典值
-     * 
+     *
      * @param dictValue 字典值
      * @param dictType 字典类型
      * @param separator 分隔符
@@ -1317,7 +1324,7 @@ public class ExcelUtil<T>
 
     /**
      * 反向解析值字典值
-     * 
+     *
      * @param dictLabel 字典标签
      * @param dictType 字典类型
      * @param separator 分隔符
@@ -1330,7 +1337,7 @@ public class ExcelUtil<T>
 
     /**
      * 数据处理器
-     * 
+     *
      * @param value 数据值
      * @param excel 数据注解
      */
@@ -1406,7 +1413,7 @@ public class ExcelUtil<T>
 
     /**
      * 获取下载路径
-     * 
+     *
      * @param filename 文件名称
      */
     public String getAbsoluteFile(String filename)
@@ -1422,7 +1429,7 @@ public class ExcelUtil<T>
 
     /**
      * 获取bean中的属性值
-     * 
+     *
      * @param vo 实体对象
      * @param field 字段
      * @param excel 注解
@@ -1455,7 +1462,7 @@ public class ExcelUtil<T>
      * */
     /**
      * 以类的属性的get方法方法形式获取值
-     * 
+     *
      * @param name （说明）
      * @return value
      * @throws Exception （说明）
@@ -1560,7 +1567,7 @@ public class ExcelUtil<T>
 
     /**
      * 创建工作表
-     * 
+     *
      * @param sheetNo sheet数量
      * @param index 序号
      */
@@ -1577,7 +1584,7 @@ public class ExcelUtil<T>
 
     /**
      * 获取单元格值
-     * 
+     *
      * @param row 获取的行
      * @param column 获取单元格列号
      * @return 单元格值
@@ -1637,7 +1644,7 @@ public class ExcelUtil<T>
 
     /**
      * 判断是否是空行
-     * 
+     *
      * @param row 判断的行
      * @return true false
      */
@@ -1721,7 +1728,7 @@ public class ExcelUtil<T>
 
     /**
      * 格式化不同类型的日期对象
-     * 
+     *
      * @param dateFormat 日期格式
      * @param val 被格式化的日期对象
      * @return 格式化后的日期字符
@@ -1787,7 +1794,7 @@ public class ExcelUtil<T>
 
     /**
      * 获取对象的子列表方法
-     * 
+     *
      * @param name 名称
      * @param pojoClass 类对象
      * @return 子列表方法

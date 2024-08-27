@@ -19,7 +19,8 @@ import com.ruoyi.quartz.service.ISysJobLogService;
 /**
  * 抽象quartz调用
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:38
  */
 public abstract class AbstractQuartzJob implements Job
 {
@@ -28,7 +29,6 @@ public abstract class AbstractQuartzJob implements Job
     /**
      * 线程本地变量
      */
-    /*字段可能为 'final' BY LMY*/
     private static final ThreadLocal<Date> threadLocal = new ThreadLocal<>();
 
     @Override

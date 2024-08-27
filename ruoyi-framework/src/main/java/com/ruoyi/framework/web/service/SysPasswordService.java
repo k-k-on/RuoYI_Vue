@@ -15,8 +15,9 @@ import com.ruoyi.framework.security.context.AuthenticationContextHolder;
 
 /**
  * 登录密码方法
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/20 9:29
  */
 @Component
 public class SysPasswordService
@@ -32,7 +33,7 @@ public class SysPasswordService
 
     /**
      * 登录账户密码错误次数缓存键名
-     * 
+     *
      * @param username 用户名
      * @return 缓存键key
      */
@@ -41,8 +42,18 @@ public class SysPasswordService
         return CacheConstants.PWD_ERR_CNT_KEY + username;
     }
 
+    /**
+     * 验证密码正确性
+     *
+     * @param user 用户信息
+     * @date 2024/8/20 9:27
+     */
     public void validate(SysUser user)
     {
+        System.out.println ("SysPasswordService.validate");
+        System.out.println ("user = " + user);
+
+
         Authentication usernamePasswordAuthenticationToken = AuthenticationContextHolder.getContext();
         String username = usernamePasswordAuthenticationToken.getName();
         String password = usernamePasswordAuthenticationToken.getCredentials().toString();
@@ -54,10 +65,6 @@ public class SysPasswordService
             retryCount = 0;
         }
 
-        /*报告取消装箱，即显式解开已环绕的基元值。
-        对于 Java 5 和更高版本，拆箱不必要，并且可以安全移除。
-        By LMY
-        */
         if (retryCount >= maxRetryCount)
         {
             throw new UserPasswordRetryLimitExceedException(maxRetryCount, lockTime);
@@ -75,6 +82,14 @@ public class SysPasswordService
         }
     }
 
+    /**
+     * 判断密码是否正确
+     *
+     * @param user 用户信息
+     * @param rawPassword 输入密码
+     * @return boolean
+     * @date 2024/8/19 18:00
+     */
     public boolean matches(SysUser user, String rawPassword)
     {
         return SecurityUtils.matchesPassword(rawPassword, user.getPassword());

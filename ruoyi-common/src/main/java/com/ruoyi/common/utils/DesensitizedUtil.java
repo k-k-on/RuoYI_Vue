@@ -3,7 +3,8 @@ package com.ruoyi.common.utils;
 /**
  * 脱敏工具类
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:33
  */
 public class DesensitizedUtil
 {

@@ -10,8 +10,9 @@ import com.ruoyi.common.enums.LimitType;
 
 /**
  * 限流注解
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 10:27
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -8,7 +8,8 @@ import javax.annotation.PreDestroy;
 /**
  * 确保应用退出时能关闭后台线程
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 11:25
  */
 @Component
 public class ShutdownManager

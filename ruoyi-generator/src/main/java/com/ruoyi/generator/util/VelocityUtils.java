@@ -16,7 +16,8 @@ import com.ruoyi.generator.domain.GenTableColumn;
 /**
  * 模板处理工具类
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/26 10:00
  */
 public class VelocityUtils
 {
@@ -47,8 +48,10 @@ public class VelocityUtils
         velocityContext.put("tableName", genTable.getTableName());
         velocityContext.put("functionName", StringUtils.isNotEmpty(functionName) ? functionName : "【请填写功能名称】");
         velocityContext.put("ClassName", genTable.getClassName());
+        //genTable.getClassName()的首字母小写
         velocityContext.put("className", StringUtils.uncapitalize(genTable.getClassName()));
         velocityContext.put("moduleName", genTable.getModuleName());
+        //genTable.getClassName()的首字母大写
         velocityContext.put("BusinessName", StringUtils.capitalize(genTable.getBusinessName()));
         velocityContext.put("businessName", genTable.getBusinessName());
         velocityContext.put("basePackage", getPackagePrefix(packageName));
@@ -62,17 +65,26 @@ public class VelocityUtils
         velocityContext.put("table", genTable);
         velocityContext.put("dicts", getDicts(genTable));//根据列类型获取字典组
         setMenuVelocityContext(velocityContext, genTable);//获取上级菜单ID字段
-        if (GenConstants.TPL_TREE.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为tree
+
+        //判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）
+        if (GenConstants.TPL_TREE.equals(tplCategory))//是否为tree
         {
             setTreeVelocityContext(velocityContext, genTable);
         }
-        if (GenConstants.TPL_SUB.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为sub
+        if (GenConstants.TPL_SUB.equals(tplCategory))//是否为sub
         {
             setSubVelocityContext(velocityContext, genTable);
         }
         return velocityContext;
     }
 
+    /**
+     * 设置上级菜单map属性
+     *
+     * @param context
+     * @param genTable
+     * @date 2024/8/26 11:09
+     */
     public static void setMenuVelocityContext(VelocityContext context, GenTable genTable)
     {
         String options = genTable.getOptions();//其它生成选项
@@ -81,6 +93,13 @@ public class VelocityUtils
         context.put("parentMenuId", parentMenuId);
     }
 
+    /**
+     * 设置数表结构生成环境
+     *
+     * @param context
+     * @param genTable
+     * @date 2024/8/26 11:10
+     */
     public static void setTreeVelocityContext(VelocityContext context, GenTable genTable)
     {
         String options = genTable.getOptions();
@@ -103,6 +122,13 @@ public class VelocityUtils
         }
     }
 
+    /**
+     * 设置主子表结构生成环境
+     *
+     * @param context
+     * @param genTable
+     * @date 2024/8/26 11:11
+     */
     public static void setSubVelocityContext(VelocityContext context, GenTable genTable)
     {
         GenTable subTable = genTable.getSubTable();
@@ -143,15 +169,17 @@ public class VelocityUtils
         templates.add("vm/xml/mapper.xml.vm");
         templates.add("vm/sql/sql.vm");
         templates.add("vm/js/api.js.vm");
-        if (GenConstants.TPL_CRUD.equals(tplCategory))//判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）是否为crud
+
+        //判断使用的模板（crud单表操作 tree树表操作 sub主子表操作）
+        if (GenConstants.TPL_CRUD.equals(tplCategory))//是否为crud
         {
             templates.add(useWebType + "/index.vue.vm");
         }
-        else if (GenConstants.TPL_TREE.equals(tplCategory))
+        else if (GenConstants.TPL_TREE.equals(tplCategory))//是否为tree
         {
             templates.add(useWebType + "/index-tree.vue.vm");
         }
-        else if (GenConstants.TPL_SUB.equals(tplCategory))
+        else if (GenConstants.TPL_SUB.equals(tplCategory))//是否为sub
         {
             templates.add(useWebType + "/index.vue.vm");
             templates.add("vm/java/sub-domain.java.vm");

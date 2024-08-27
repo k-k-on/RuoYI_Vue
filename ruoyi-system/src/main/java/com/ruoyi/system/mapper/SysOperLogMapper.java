@@ -5,21 +5,22 @@ import com.ruoyi.system.domain.SysOperLog;
 
 /**
  * 操作日志 数据层
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:47
  */
 public interface SysOperLogMapper
 {
     /**
      * 新增操作日志
-     * 
+     *
      * @param operLog 操作日志对象
      */
     void insertOperlog(SysOperLog operLog);
 
     /**
      * 查询系统操作日志集合,在sys_oper_log表中
-     * 
+     *
      * @param operLog 操作日志对象
      * @return 操作日志集合
      */
@@ -27,7 +28,7 @@ public interface SysOperLogMapper
 
     /**
      * 批量删除系统操作日志
-     * 
+     *
      * @param operIds 需要删除的操作日志ID
      * @return 结果
      */
@@ -35,7 +36,7 @@ public interface SysOperLogMapper
 
     /**
      * 查询操作日志详细
-     * 
+     *
      * @param operId 操作ID
      * @return 操作日志对象
      */

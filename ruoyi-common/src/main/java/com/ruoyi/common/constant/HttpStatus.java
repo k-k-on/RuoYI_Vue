@@ -2,8 +2,9 @@ package com.ruoyi.common.constant;
 
 /**
  * 返回状态码
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 10:13
  */
 public class HttpStatus
 {

@@ -17,8 +17,9 @@ import com.ruoyi.common.enums.HttpMethod;
 
 /**
  * 防止XSS攻击的过滤器
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:16
  */
 public class XssFilter implements Filter
 {

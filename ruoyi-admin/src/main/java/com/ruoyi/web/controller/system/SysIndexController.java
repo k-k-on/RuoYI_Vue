@@ -6,16 +6,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.utils.StringUtils;
 
+import javax.annotation.Resource;
+
 /**
  * 首页
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 15:59
  */
 @RestController
 public class SysIndexController
 {
     /** 系统基础配置 */
-    @Autowired
+    @Resource(name = "ruoYiConfig")
     private RuoYiConfig ruoyiConfig;
 
     /**

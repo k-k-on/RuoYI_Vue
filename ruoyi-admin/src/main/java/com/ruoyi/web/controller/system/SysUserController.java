@@ -2,9 +2,9 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,23 +34,24 @@ import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 用户信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 9:40
  */
 @RestController
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
 {
-    @Autowired
+    @Resource(name = "sysUserServiceImpl")
     private ISysUserService userService;
 
-    @Autowired
+    @Resource(name = "sysRoleServiceImpl")
     private ISysRoleService roleService;
 
-    @Autowired
+    @Resource(name = "sysDeptServiceImpl")
     private ISysDeptService deptService;
 
-    @Autowired
+    @Resource(name = "sysPostServiceImpl")
     private ISysPostService postService;
 
     /**
@@ -87,11 +88,11 @@ public class SysUserController extends BaseController
         return success(message);
     }
 
-    @PostMapping("/importTemplate")
-    public void importTemplate(HttpServletResponse response)
+    @PostMapping("/downloadTemplate")
+    public void downloadTemplate(HttpServletResponse response)
     {
         ExcelUtil<SysUser> util = new ExcelUtil<> (SysUser.class);
-        util.importTemplateExcel(response, "用户数据");
+        util.downloadTemplateExcel (response, "用户数据");
     }
 
     /**
@@ -130,7 +131,7 @@ public class SysUserController extends BaseController
         {
             return error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         }
-        else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user))
+        else if (StringUtils.isNotEmpty(user.getPhoneNumber ()) && !userService.checkPhoneUnique(user))
         {
             return error("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
         }
@@ -159,7 +160,7 @@ public class SysUserController extends BaseController
         {
             return error("修改用户'" + user.getUserName() + "'失败，登录账号已存在");
         }
-        else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user))//校验手机号码是否唯一
+        else if (StringUtils.isNotEmpty(user.getPhoneNumber ()) && !userService.checkPhoneUnique(user))//校验手机号码是否唯一
         {
             return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
         }
@@ -251,6 +252,7 @@ public class SysUserController extends BaseController
     @GetMapping("/deptTree")
     public AjaxResult deptTree(SysDept dept)
     {
-        return success(deptService.selectDeptTreeList(dept));  //返回AjaxResult对象，该对象包含：状态码code、返回内容msg、数据信息data
+        //返回AjaxResult对象，该对象包含：状态码code、返回内容msg、数据信息data
+        return success(deptService.selectDeptTreeList(dept));
     }
 }

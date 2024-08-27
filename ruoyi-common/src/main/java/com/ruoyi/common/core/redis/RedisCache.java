@@ -13,16 +13,19 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * spring redis 工具类
  *
- * @author ruoyi
- **/
+ * @author LiMengYuan
+ * @date 2024/8/27 15:02
+ */
 @SuppressWarnings(value = { "unchecked", "rawtypes" })
 @Component
 public class RedisCache
 {
-    @Autowired
+    @Resource
     public RedisTemplate redisTemplate;
 
     /**

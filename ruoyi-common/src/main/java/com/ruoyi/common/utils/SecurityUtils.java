@@ -15,15 +15,20 @@ import com.ruoyi.common.exception.ServiceException;
 
 /**
  * 安全服务工具类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/21 10:08
  */
 public class SecurityUtils
 {
 
     /**
      * 用户ID
-     **/
+     *
+     * @return Long 用户ID
+     * @throws ServiceException 未授权401
+     * @date 2024/8/21 10:11
+     */
     public static Long getUserId()
     {
         try
@@ -68,12 +73,17 @@ public class SecurityUtils
 
     /**
      * 获取用户
-     **/
+     *
+     * @return LoginUser
+     * @throws ServiceException 401
+     * @date 2024/8/21 10:15
+     */
     public static LoginUser getLoginUser()
     {
         try
         {
-            return (LoginUser) getAuthentication().getPrincipal(); //获取Authentication的getPrincipal
+            //获取Authentication的Principal属性
+            return (LoginUser) getAuthentication().getPrincipal();
         }
         catch (Exception e)
         {
@@ -82,7 +92,10 @@ public class SecurityUtils
     }
 
     /**
-     * 获取Authentication
+     * 通过Security上下文获取Authentication
+     *
+     * @return Authentication 用户信息
+     * @date 2024/8/21 10:51
      */
     public static Authentication getAuthentication()
     {
@@ -104,19 +117,25 @@ public class SecurityUtils
     /**
      * 判断密码是否相同
      *
-     * @param rawPassword 真实密码
-     * @param encodedPassword 加密后字符
-     * @return 结果
+     * @param rawPassword 输入密码
+     * @param encodedPassword 数据库中加密密码
+     * @return boolean 结果
+     * @date 2024/8/20 9:31
      */
     public static boolean matchesPassword(String rawPassword, String encodedPassword)
     {
+
+        System.out.println ("SecurityUtils.matchesPassword");
+        System.out.println ("rawPassword = " + rawPassword);
+        System.out.println ("encodedPassword = " + encodedPassword);
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
     /**
      * 是否为管理员
-     * 
+     *
      * @param userId 用户ID
      * @return 结果
      */
@@ -127,7 +146,7 @@ public class SecurityUtils
 
     /**
      * 验证用户是否具备某权限
-     * 
+     *
      * @param permission 权限字符串
      * @return 用户是否具备某权限
      */
@@ -138,7 +157,7 @@ public class SecurityUtils
 
     /**
      * 判断是否包含权限
-     * 
+     *
      * @param authorities 权限列表
      * @param permission 权限字符串
      * @return 用户是否具备某权限
@@ -151,7 +170,7 @@ public class SecurityUtils
 
     /**
      * 验证用户是否拥有某个角色
-     * 
+     *
      * @param role 角色标识
      * @return 用户是否具备某角色
      */
@@ -164,7 +183,7 @@ public class SecurityUtils
 
     /**
      * 判断是否包含角色
-     * 
+     *
      * @param roles 角色列表
      * @param role 角色
      * @return 用户是否具备某角色权限

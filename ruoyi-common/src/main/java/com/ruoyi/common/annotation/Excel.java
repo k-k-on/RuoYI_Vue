@@ -11,8 +11,9 @@ import com.ruoyi.common.utils.poi.ExcelHandlerAdapter;
 
 /**
  * 自定义导出Excel数据注解
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 10:26
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

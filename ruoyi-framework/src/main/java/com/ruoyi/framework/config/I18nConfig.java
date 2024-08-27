@@ -11,8 +11,9 @@ import com.ruoyi.common.constant.Constants;
 
 /**
  * 资源文件配置加载
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 10:52
  */
 @Configuration
 public class I18nConfig implements WebMvcConfigurer

@@ -20,9 +20,9 @@ import com.ruoyi.quartz.domain.SysJob;
 
 /**
  * 定时任务工具类
- * 
- * @author ruoyi
  *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:40
  */
 public class ScheduleUtils
 {
@@ -121,7 +121,7 @@ public class ScheduleUtils
 
     /**
      * 检查包名是否为白名单配置
-     * 
+     *
      * @param invokeTarget 目标字符串
      * @return 结果
      */

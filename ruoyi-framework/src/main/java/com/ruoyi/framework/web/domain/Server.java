@@ -23,13 +23,14 @@ import oshi.util.Util;
 
 /**
  * 服务器相关信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:37
  */
 public class Server
 {
     private static final int OSHI_WAIT_SECOND = 1000;
-    
+
     /**
      * CPU相关信息
      */
@@ -111,13 +112,9 @@ public class Server
         HardwareAbstractionLayer hal = si.getHardware();
 
         setCpuInfo(hal.getProcessor());//设置CPU信息
-
         setMemInfo(hal.getMemory());//设置内存信息
-
         setSysInfo();//设置服务器信息
-
         setJvmInfo();//设置Java虚拟机
-
         setSysFiles(si.getOperatingSystem());//设置磁盘信息
     }
 
@@ -208,7 +205,7 @@ public class Server
 
     /**
      * 字节转换
-     * 
+     *
      * @param size 字节大小
      * @return 转换后值
      */

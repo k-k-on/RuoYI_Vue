@@ -25,15 +25,20 @@ import com.ruoyi.system.domain.SysCache;
 
 /**
  * 缓存监控
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/23 16:01
  */
 @RestController
 @RequestMapping("/monitor/cache")
 public class CacheController
 {
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    //@Autowired
+    private final RedisTemplate<String, String> redisTemplate;
+
+    public CacheController(RedisTemplate<String, String> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     private final static List<SysCache> caches = new ArrayList<> ();
     static {
@@ -48,15 +53,8 @@ public class CacheController
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:cache:list')")
-    @GetMapping()
+    @GetMapping
     public AjaxResult getInfo() {
-        /*报告可以替换为方法引用的 lambda。 方法引用比 lambda 更容易理解和阅读，尽管它们通常取决于您的喜好。
-        * By LMY
-        * */
-        /*Properties info = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.info());//使用lambda表达式返回RedisCallback对象的info方法调用结果
-        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.info("commandstats"));//返回info指令中commandstats部分，即Redis 命令统计
-        Object dbSize = redisTemplate.execute((RedisCallback<Object>) connection -> connection.dbSize());//使用lambda表达式返回RedisCallback对象的dbSize方法调用结果，获取当前所选数据库中可用键的总数
-*/
         Properties info = (Properties) redisTemplate.execute((RedisCallback<Object>) RedisServerCommands::info);//使用lambda表达式返回RedisCallback对象的info方法调用结果
         Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.info("commandstats"));//返回info指令中commandstats部分，即Redis 命令统计
         Object dbSize = redisTemplate.execute((RedisCallback<Object>) RedisServerCommands::dbSize);//使用lambda表达式返回RedisCallback对象的dbSize方法调用结果，获取当前所选数据库中可用键的总数

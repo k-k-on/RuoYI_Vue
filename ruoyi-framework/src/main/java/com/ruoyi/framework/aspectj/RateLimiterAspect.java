@@ -22,7 +22,8 @@ import com.ruoyi.common.utils.ip.IpUtils;
 /**
  * 限流处理
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/27 10:49
  */
 @Aspect
 @Component

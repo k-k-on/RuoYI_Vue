@@ -6,8 +6,9 @@ import com.ruoyi.common.core.text.Convert;
 
 /**
  * 权限信息
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/22 9:57
  */
 public class PermissionContextHolder
 {

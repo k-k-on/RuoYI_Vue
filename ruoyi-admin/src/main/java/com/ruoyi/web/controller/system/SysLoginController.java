@@ -17,28 +17,32 @@ import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
 import com.ruoyi.system.service.ISysMenuService;
 
+import javax.annotation.Resource;
+
 /**
  * 登录验证
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/20 17:20
  */
 @RestController
 public class SysLoginController
 {
-    @Autowired
+    @Resource(name = "sysLoginService")
     private SysLoginService loginService;
 
-    @Autowired
+    @Resource(name = "sysMenuServiceImpl")
     private ISysMenuService menuService;
 
-    @Autowired
+    @Resource(name = "sysPermissionService")
     private SysPermissionService permissionService;
 
     /**
      * 登录方法
-     * 
+     *
      * @param loginBody 登录信息
-     * @return 结果
+     * @return AjaxResult 返回token信息
+     * @date 2024/8/21 9:49
      */
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginBody loginBody)
@@ -53,8 +57,9 @@ public class SysLoginController
 
     /**
      * 获取用户信息:角色信息+权限信息
-     * 
-     * @return 用户信息
+     *
+     * @return AjaxResult 用户信息user+roles+permissions
+     * @date 2024/8/21 10:08
      */
     @GetMapping("getInfo")
     public AjaxResult getInfo()
@@ -74,7 +79,7 @@ public class SysLoginController
     /**
      * 获取路由信息
      * 思路：根据用户查询菜单，生成动态路由，查找所有菜单，并折叠成由父id管理子id的menus列表，与前端生成的菜单列表对应
-     * 
+     *
      * @return 路由信息
      */
     @GetMapping("getRouters")

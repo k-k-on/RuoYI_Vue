@@ -12,8 +12,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 部门表 sys_dept
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 11:42
  */
 public class SysDept extends BaseEntity
 {
@@ -46,12 +47,12 @@ public class SysDept extends BaseEntity
     /** 部门状态:0正常,1停用 */
     private String status;
 
-    /** 删除标志（0代表存在 2代表删除） */
+    /** 删除标志（0存在 2删除） */
     private String delFlag;
 
     /** 父部门名称 */
     private String parentName;
-    
+
     /** 子部门 */
     private List<SysDept> children = new ArrayList<> ();
 

@@ -16,7 +16,8 @@ import com.ruoyi.common.utils.SecurityUtils;
 /**
  * 数据脱敏序列化过滤
  *
- * @author ruoyi
+ * @author LiMengYuan
+ * @date 2024/8/22 10:51
  */
 public class SensitiveJsonSerializer extends JsonSerializer<String> implements ContextualSerializer
 {

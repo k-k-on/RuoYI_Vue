@@ -2,8 +2,9 @@ package com.ruoyi.common.exception.user;
 
 /**
  * 黑名单IP异常类
- * 
- * @author ruoyi
+ *
+ * @author LiMengYuan
+ * @date 2024/8/27 15:13
  */
 public class BlackListException extends UserException
 {
